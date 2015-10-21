@@ -9,8 +9,7 @@ module Actions
       puts WHEN_ASLEEP.sample
     else
       @info[:level_of_food] = MAX_VALUE
-      @info[:demand_for_walk] += SOME_VALUE
-      @info[:mood] = MAX_VALUE
+      @info[:demand_for_walk] += SOME_VALUE * 6
       @info[:placidity] += SOME_VALUE
       @info[:health] += SOME_VALUE
       puts "#{@name} наївся."
@@ -119,7 +118,6 @@ class Animal
     @info = { mood: MAX_VALUE, health: MAX_VALUE, level_of_food: MAX_VALUE,
               activity: MAX_VALUE, cleanliness: MAX_VALUE,
               demand_for_walk: MIN_VALUE, placidity: MAX_VALUE }
-    @many = ''
     @small = ''
   end
 
@@ -154,10 +152,8 @@ class Animal
   end
 
   def after_check_max
-    if @info[:demand_for_walk] >= MAX_VALUE
-      puts "\e[33m#{@name} зробив недобре прям посеред кімнати...\e[0m"
-      @info[:demand_for_walk] = MIN_VALUE
-    end
+    puts "\e[33mУпссс..не встигли\e[0m" if @info[:demand_for_walk] >= MAX_VALUE
+    @info[:demand_for_walk] = MIN_VALUE if @info[:demand_for_walk] >= MAX_VALUE
   end
 
   def check_min
