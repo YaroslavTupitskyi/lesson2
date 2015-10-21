@@ -11,6 +11,7 @@ module Actions
       @info[:level_of_food] = MAX_VALUE
       @info[:demand_for_walk] += SOME_VALUE
       @info[:mood] = MAX_VALUE
+      @info[:placidity] += SOME_VALUE
       @info[:health] += SOME_VALUE
       puts "#{@name} наївся."
       passed_few_time
@@ -148,17 +149,14 @@ class Animal
   end
 
   def check_max
-    @info.each { |key, value| @many = key if value > MAX_VALUE }
+    @info.each_key { |key| @info[key] = MAX_VALUE if @info[key] > MAX_VALUE }
     after_check_max
   end
 
   def after_check_max
-    case @many
-    when :demand_for_walk
-      puts "\e[33m#{@name} зробив(ла) недобре прям посеред кімнати...\e[0m"
-      @info[@many] = MIN_VALUE
-    else
-      @info[@many] = MAX_VALUE
+    if @info[:demand_for_walk] >= MAX_VALUE
+      puts "\e[33m#{@name} зробив недобре прям посеред кімнати...\e[0m"
+      @info[:demand_for_walk] = MIN_VALUE
     end
   end
 
