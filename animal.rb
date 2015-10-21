@@ -9,7 +9,7 @@ module Actions
       puts WHEN_ASLEEP.sample
     else
       @info[:level_of_food] = MAX_VALUE
-      @info[:demand_for_walk] += SOME_VALUE * 6
+      @info[:demand_for_walk] += SOME_VALUE
       @info[:placidity] += SOME_VALUE
       @info[:health] += SOME_VALUE
       puts "#{@name} наївся."
